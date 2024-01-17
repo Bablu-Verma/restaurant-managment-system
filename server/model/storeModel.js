@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { addressSchema } from "./addressSchema.js";
 
+
 const storeSchema = new mongoose.Schema(
   {
     store_name: {
@@ -22,6 +23,10 @@ const storeSchema = new mongoose.Schema(
       type: String,
       required: [true, " Store logo is require"],
     },
+    payment_receive_qr_image: {
+      type: String,
+      required: [true, " Store logo is require"],
+    },
     subscription_type: {
       type: String,
       required: [true, " subscription is require"],
@@ -34,28 +39,12 @@ const storeSchema = new mongoose.Schema(
     subscription_end_date: {
       type: Date,
     },
-    payment_details: {
-      payment_method: {
-        type: String, // e.g., 'credit_card', 'paypal'
-      },
-      transaction_id: {
-        type: String, // Unique ID for the transaction
-      },
-      payment_amount: {
-        type: Number,
-        required: [true, "Payment amount is required"],
-      },
-      payment_date: {
-        type: Date,
-      },
-      payment_status: {
-        type: String, // e.g., 'completed', 'pending', 'failed'
-      },
-    },
+    
     audit_trail: [{
         changed_at: Date,
         changes: mongoose.Schema.Types.Mixed, 
-      }],
+    }],
+
   },
   { timestamps: true }
 );
@@ -64,3 +53,10 @@ const StoreModel = mongoose.model("Store", storeSchema);
 export default StoreModel;
 
 
+storeSchema.methods.updateSubscriptionStatus = function() {
+  const currentDate = new Date();
+  if (this.subscription_end_date && currentDate > this.subscription_end_date) {
+    this.subscription_type = "PENDING";
+  
+  }
+};
