@@ -11,6 +11,7 @@ import getAllUserController from "../controller/admin/getAllUserController.js";
 import searchUserController from "../controller/admin/searchUserController.js";
 import adminDeleteUserAccount from "../controller/admin/adminDeleteUserAccount.js";
 import getUserProfileByAdmin from "../controller/admin/getUserProfileByAdmin.js";
+import { UserVerifyGetOTP, UserVerifyRequest } from "../controller/user/UserVerifyController.js";
 
 
 const route = Express.Router();
@@ -22,6 +23,10 @@ route.post("/update-user", validUser, uploadImage.single('profile'), updateUserC
 route.post("/update-user-profile", validUser, uploadImage.single('profile'), updateProfileController);
 route.post("/change-password",validUser, changePasswordController);
 route.post("/delete-user-profile",validUser, deleteUserProfileController);
+route.post("/user-verify-request",validUser, UserVerifyRequest);
+route.post("/user-verify-get-otp",validUser, UserVerifyGetOTP);
+
+
 
 
 // admin 

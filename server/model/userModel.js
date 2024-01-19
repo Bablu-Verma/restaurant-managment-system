@@ -27,20 +27,23 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: Number,
-      enum: ['ADMIN', 'USER'],
-      default: 'USER', 
+      enum: [0, 1], // 1 ADMIN , 0 USER'
+      default: 0,
     },
     profile: {
       type: String,
     },
+
     shops: [{ type: mongoose.Schema.Types.ObjectId, ref: "Store" }],
+
     otp: {
       type: String,
       default: null,
     },
     verify: {
-      type: Boolean,
-      default: false,
+      type: Number,
+      enum: [0, 1], //  0 user not verify, 1 user verify
+      default: 0,
     },
   },
   { timestamps: true }

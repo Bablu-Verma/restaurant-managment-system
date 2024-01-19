@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
+ 
 
- 
- 
   const paymentSchema = new mongoose.Schema(
     {
       user_id:{
@@ -15,7 +14,7 @@ import mongoose from "mongoose";
       method: {
         type: String,
         required: [true, "Payment method is required"],
-        enum: ["CREDIT_CARD", "DEBIT_CARD", "PAYPAL", "OTHER"],
+        enum: ['RAZORPAY'],
       },
       amount: {
         type: Number,
@@ -26,9 +25,9 @@ import mongoose from "mongoose";
         default: Date.now,
       },
       transaction_status: {
-        type: String,
+        type: Number,
         required: [true, "Transaction status is required"],
-        enum: ["PENDING", "COMPLETED", "FAILED"],
+        enum: [0,1,2],  //  0 FAILED, 1 COMPLETED, 2 PENDING
       },
     },
     { timestamps: true }

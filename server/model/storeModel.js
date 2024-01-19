@@ -28,10 +28,10 @@ const storeSchema = new mongoose.Schema(
       required: [true, " Store logo is require"],
     },
     subscription_type: {
-      type: String,
+      type: Number,
       required: [true, " subscription is require"],
-      enum: ["30DAYSFREE", "PENDING", "SUBSCRIBER"],
-      default: "30DAYSFREE",
+      enum: [0, 1, 2, 3, 4], // 0 PENDING, 1 FREE, 2 SUBSCRIBE, 3 PAYMENTHOLD
+      default: 1,
     },
     subscription_start_date: {
       type: Date,
@@ -52,11 +52,9 @@ const storeSchema = new mongoose.Schema(
 const StoreModel = mongoose.model("Store", storeSchema);
 export default StoreModel;
 
-
 storeSchema.methods.updateSubscriptionStatus = function() {
   const currentDate = new Date();
   if (this.subscription_end_date && currentDate > this.subscription_end_date) {
-    this.subscription_type = "PENDING";
-  
+    this.subscription_type = 0;
   }
 };

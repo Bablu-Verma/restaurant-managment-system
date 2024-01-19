@@ -28,13 +28,6 @@ import { decoded_token, generateToken } from "../../helper/smallFunction.js";
     
       const user = await UserModel.findOne({ _id: decoded.id });
   
-      if (user.otp != otp) {
-        return resp.status(401).send({
-          message: "OTP Not Valid, Check OTP",
-          code: 0,
-          status: 0,
-        });
-      }
       
       const token_time = decoded.time 
       const add10min = token_time + 10 * 60 * 1000;
@@ -44,6 +37,14 @@ import { decoded_token, generateToken } from "../../helper/smallFunction.js";
       if( add10min <= current_time){
         return resp.status(401).send({
           message: "OTP Valid only 10 Min, Resend OTP",
+          code: 0,
+          status: 0,
+        });
+      }
+
+      if (user.otp != otp) {
+        return resp.status(401).send({
+          message: "OTP Not Valid, Check OTP",
           code: 0,
           status: 0,
         });

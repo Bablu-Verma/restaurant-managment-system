@@ -51,3 +51,18 @@ export const decoded_token = async (authorization) =>{
   const regex = /^\d{10}$/;
   return regex.test(phoneNumber);
 }
+
+export const checkValidTime = (time)=>{
+
+  const token_time = time;
+  const add10min = token_time + 10 * 60 * 1000;
+  const gat_date = new Date();
+  const current_time = gat_date.getTime();
+
+  if (add10min <= current_time) {
+    return false
+  }else{
+    return true
+  }
+
+} 

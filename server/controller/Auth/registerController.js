@@ -3,7 +3,7 @@ import UserModel from "../../model/userModel.js";
 
 
 const registerController = async (req, resp) => {
-    const { name, password, phone, email, gander } =
+    const { name, password, phone, email, gender } =
       req.body;
 
     let profile = null;
@@ -41,9 +41,9 @@ const registerController = async (req, resp) => {
       });
     }
    
-    if (!gander) {
+    if (!gender) {
       return resp.status(401).send({
-        message: "Chosse Your Gander",
+        message: "Chosse Your gender",
         code: 0,
         status: 0,
       });
@@ -79,11 +79,21 @@ const registerController = async (req, resp) => {
     }
    
     try {
-      const userExist = await UserModel.findOne({ email });
-      if (userExist) {
+      const checkEmailExist = await UserModel.findOne({ email });
+      if (checkEmailExist) {
         return resp.status(401).send({
-          message: "User Exist, Please Login Now",
+          message: "Email is use, Please Login Now",
           userEmail: email,
+          code: 0,
+          status: 0,
+        });
+      }
+      const checkPhoneExist = await UserModel.findOne({ phone });
+      
+      if (checkPhoneExist) {
+        return resp.status(401).send({
+          message: `This phone number is use another email address, use another phone number`,
+          phone: phone,
           code: 0,
           status: 0,
         });
@@ -94,7 +104,7 @@ const registerController = async (req, resp) => {
         name,
         password: hashedPassword,
         email,
-        gander,
+        gender,
         profile,
         phone
       });
@@ -104,11 +114,7 @@ const registerController = async (req, resp) => {
         message: "User Created Successfully",
         code: 1,
         status: 1,
-        user:{
-         name: new_user.name,
-         email: new_user.email,
-         phone: new_user.phone
-        }
+        user:new_user
       });
     } catch (error) {
       resp.status(500).send({

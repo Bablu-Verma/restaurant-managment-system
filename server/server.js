@@ -26,7 +26,7 @@ app.use(express.static('public'));
 
 // routes
 app.get("/", (req, resp) => {
-  resp.send("restaurant managment system softwear is working 🙃");
+  resp.send("restaurant managment softwear is working 🙃");
 });
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
