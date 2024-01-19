@@ -16,7 +16,7 @@ const AddStoreController = async (req, resp) => {
 
   const decoded = await decoded_token(authorization);
 
-  const User = await UserModel.findOne({ _id: decoded.id });
+  // const User = await UserModel.findOne({ _id: decoded.id });
 
   const storeLogo = req.files.store_logo ? req.files.store_logo[0].path : null;
   const paymentQRImage = req.files.payment_receive_qr_image
@@ -140,6 +140,11 @@ const AddStoreController = async (req, resp) => {
     });
 
   const store = await newstore.save()
+  
+        await UserModel.findByIdAndUpdate(decoded.id, 
+            { $push: { shops: store._id } },
+            { new: true, useFindAndModify: false }
+        );
     resp.status(201).send({
       message: "store created successfully",
       code: 1,
