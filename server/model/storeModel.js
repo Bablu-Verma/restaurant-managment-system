@@ -34,10 +34,13 @@ const storeSchema = new mongoose.Schema(
       default: 1,
     },
     subscription_start_date: {
-      type: Date,
+      type: Number,
     },
     subscription_end_date: {
-      type: Date,
+      type: Number,
+    },
+    store_description: {
+      type: String,
     },
     
     audit_trail: [{
