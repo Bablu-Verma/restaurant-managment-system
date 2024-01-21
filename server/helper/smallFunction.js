@@ -24,7 +24,6 @@ export const compare_password = async (client_password, server_password) => {
   return password;
 };
 
-
  export const generateToken = async (user)=>{
     let SECRETKEY = process.env.SECRETKEY;
     const d = new Date();

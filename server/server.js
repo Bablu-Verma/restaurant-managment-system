@@ -8,6 +8,9 @@ import connsectDB from "./cofig/db.js";
 import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
 import storeRoute from "./routes/storeRoute.js";
+import tableRoute from "./routes/tableRoute.js";
+
+
 
 const app = express();
 dotenv.config();
@@ -33,9 +36,13 @@ app.get("/", (req, resp) => {
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/user/store", storeRoute);
+app.use("/api/v1/user/store/table", tableRoute);
+
+
 
 // app listen
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`app listen on ${process.env.APP_MODE}, port url ${port}`.bgCyan);
 });
+

@@ -5,6 +5,10 @@ import AddStoreController from "../controller/store/addStore.js";
 import VerifyUser from "../middleware/VerifyUser.js";
 import StoreListController from "../controller/store/listStore.js";
 import GetStoreDetailsController from "../controller/store/getStoreDetails.js";
+import { StoreDeleteRequest, storeDeleteVerify } from "../controller/store/deleteStore.js";
+import updateStore from "../controller/store/updateStore.js";
+import updateStoreAddress from "../controller/store/updateStoreAddress.js";
+
 
 const route = Express.Router();
 
@@ -12,8 +16,19 @@ route.post("/add-store", validUser, VerifyUser, uploadImage.fields([
     { name: 'store_logo', maxCount: 1 }, 
     { name: 'payment_receive_qr_image', maxCount: 1 }
 ]), AddStoreController );
+
 route.get("/store-list", validUser, VerifyUser, StoreListController );
-route.post("/get-store-details", validUser, VerifyUser, GetStoreDetailsController );
+route.post("/get-store-details", validUser, VerifyUser, GetStoreDetailsController);
+route.post("/store-delete-request", validUser, VerifyUser, StoreDeleteRequest);
+route.post("/store-delete-verify", validUser, VerifyUser, storeDeleteVerify);
+route.post("/update-store", validUser, VerifyUser,uploadImage.fields([
+    { name: 'store_logo', maxCount: 1 }, 
+    { name: 'payment_receive_qr_image', maxCount: 1 }
+]), updateStore);
+route.post("/update-store-address", validUser, VerifyUser,updateStoreAddress);
+
+
+
 
 export default route;
 

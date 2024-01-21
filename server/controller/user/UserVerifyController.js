@@ -24,7 +24,7 @@ export const UserVerifyRequest = async (req, resp) => {
 
     const token = await generateToken(User);
 
-    console.log(User);
+    // console.log(User);
 
     return resp.status(200).send({
       message: "Send OTP in Your Email Successfully, Check Now",
