@@ -4,13 +4,7 @@ import TableModel from "../../model/tableModel.js";
 const AddTable = async (req, resp) => {
   const { table_no, store_id } = req.body;
 
-  if (!store_id) {
-    return resp.status(401).send({
-      message: "Add Store Id",
-      code: 0,
-      status: 0,
-    });
-  }
+
 
   if (!table_no) {
     return resp.status(401).send({
