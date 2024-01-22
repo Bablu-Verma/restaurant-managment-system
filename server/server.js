@@ -9,8 +9,8 @@ import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
 import storeRoute from "./routes/storeRoute.js";
 import tableRoute from "./routes/tableRoute.js";
-
-
+import urlRoute from "./routes/urlRoute.js";
+import categoryRoute from "./routes/categoryRoute.js";
 
 const app = express();
 dotenv.config();
@@ -37,7 +37,8 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/user/store", storeRoute);
 app.use("/api/v1/user/store/table", tableRoute);
-
+app.use(urlRoute);
+app.use("/api/v1/user/store/category", categoryRoute);
 
 
 // app listen
