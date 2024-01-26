@@ -11,6 +11,8 @@ import storeRoute from "./routes/storeRoute.js";
 import tableRoute from "./routes/tableRoute.js";
 import urlRoute from "./routes/urlRoute.js";
 import categoryRoute from "./routes/categoryRoute.js";
+import foodRoute from "./routes/foodRoute.js";
+
 
 const app = express();
 dotenv.config();
@@ -39,7 +41,7 @@ app.use("/api/v1/user/store", storeRoute);
 app.use("/api/v1/user/store/table", tableRoute);
 app.use(urlRoute);
 app.use("/api/v1/user/store/category", categoryRoute);
-
+app.use("/api/v1/user/store/food", foodRoute);
 
 // app listen
 const port = process.env.PORT || 8000;

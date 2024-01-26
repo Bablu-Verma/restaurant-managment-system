@@ -3,6 +3,7 @@ import StoreModel from "../model/storeModel.js";
 
 const CheckSubscription = async (req, resp, next) => {
      const {store_id} = req.body
+    //  console.log(req.body)
 
 
      if (!store_id) {
