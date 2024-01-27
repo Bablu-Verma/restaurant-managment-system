@@ -1,3 +1,4 @@
+import FoodModel from "../../model/foodModel.js";
 import StoreModel from "../../model/storeModel.js";
 
 const orderLandingController = async (req, resp) =>{
@@ -6,8 +7,10 @@ const orderLandingController = async (req, resp) =>{
     const tableKey = req.query.table
 
   try {
-
+     
+   
     const store = await StoreModel.findById(storeId)
+    const food = await FoodModel.find({store_id:storeId})
     resp.status(200).send({
         message: "get landing page",
         code: 1,
@@ -15,7 +18,8 @@ const orderLandingController = async (req, resp) =>{
         store:{
             name: store.store_name,
             logo: store.store_logo
-        }
+        },
+        food
       });
   } catch (error) {
     resp.status(500).send({
