@@ -19,9 +19,6 @@ const AddStoreController = async (req, resp) => {
   // const User = await UserModel.findOne({ _id: decoded.id });
 
   const storeLogo = req.files.store_logo ? req.files.store_logo[0].path : null;
-  const paymentQRImage = req.files.payment_receive_qr_image
-    ? req.files.payment_receive_qr_image[0].path
-    : null;
 
   if (!store_name) {
     return resp.status(401).send({
@@ -62,14 +59,7 @@ const AddStoreController = async (req, resp) => {
       status: 0,
     });
   }
-  if (paymentQRImage == null) {
-    return resp.status(401).send({
-      message: "Add Your Any UPI Scanner Image, For reciving Money",
-      code: 0,
-      status: 0,
-    });
-  }
-
+ 
   if (!city) {
     return resp.status(401).send({
       message: "add your city",
@@ -132,7 +122,6 @@ const AddStoreController = async (req, resp) => {
       store_name,
       owner: decoded.id,
       store_logo: storeLogo,
-      payment_receive_qr_image: paymentQRImage,
       store_description,
       subscription_start_date: start_time,
       subscription_end_date: end_date,
@@ -145,6 +134,7 @@ const AddStoreController = async (req, resp) => {
             { $push: { shops: store._id } },
             { new: true, useFindAndModify: false }
         );
+        
     resp.status(201).send({
       message: "store created successfully",
       code: 1,

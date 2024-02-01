@@ -44,6 +44,10 @@ const orderSchema = new mongoose.Schema(
       enum: ["Preparing", "Prepared", "On Table"],
       default: "Preparing",
     },
+    order_id:{
+      type: Number,
+      default: 1,
+    },
     payment:{
       type: Number,
       enum: [0, 1], // 0 no payment, 1 payment is successful

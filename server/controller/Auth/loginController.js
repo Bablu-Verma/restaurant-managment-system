@@ -54,14 +54,13 @@ const loginController = async (req, resp) => {
 
       resp.status(201).send({
         message: "User Login Successfully",
-        code: 1,
+        error: 0,
         status: 1,
-        user: {
-          name: User.name,
-          email: User.email,
-          profile_url: User.profile,
-          token,
+        response: {
+          user:User, 
         },
+        token
+
       });
 
     } catch (error) {

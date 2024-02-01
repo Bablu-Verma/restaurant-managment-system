@@ -35,7 +35,6 @@ const userSchema = new mongoose.Schema(
     },
 
     shops: [{ type: mongoose.Schema.Types.ObjectId, ref: "Store" }],
-
     otp: {
       type: String,
       default: null,

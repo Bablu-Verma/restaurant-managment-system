@@ -112,9 +112,11 @@ const registerController = async (req, resp) => {
       const new_user = await User.save();
       resp.status(201).send({
         message: "User Created Successfully",
-        code: 1,
+        error: 0,
         status: 1,
-        user:new_user
+        response:{
+          user:new_user
+        }
       });
     } catch (error) {
       resp.status(500).send({

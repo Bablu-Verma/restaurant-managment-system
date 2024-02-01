@@ -23,14 +23,10 @@ const storeSchema = new mongoose.Schema(
       type: String,
       required: [true, " Store logo is require"],
     },
-    payment_receive_qr_image: {
-      type: String,
-      required: [true, " Store logo is require"],
-    },
     subscription_type: {
       type: Number,
       required: [true, " subscription is require"],
-      enum: [0, 1, 2, 3, 4], // 0 PENDING, 1 FREE, 2 SUBSCRIBE, 3 PAYMENTHOLD
+      enum: [0, 1, 2, 3, 4], // ['expired','trial','active', 'on-hold', ]
       default: 1,
     },
     subscription_start_date: {
@@ -42,7 +38,17 @@ const storeSchema = new mongoose.Schema(
     store_description: {
       type: String,
     },
-    
+    work_role: [{
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      role: {
+        type: String,
+        enum: ["manager", "cook"],
+      },
+    }], 
+     
     audit_trail: [{
         changed_at: Date,
         changes: mongoose.Schema.Types.Mixed, 
@@ -61,3 +67,7 @@ storeSchema.methods.updateSubscriptionStatus = function() {
     this.subscription_type = 0;
   }
 };
+// managers: [{
+//   type: mongoose.Schema.Types.ObjectId,
+//   ref: "User",
+//  }],

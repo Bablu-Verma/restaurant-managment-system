@@ -2,8 +2,6 @@
 
 import OrderModel from "../../model/orderModel.js";
 
-
-
 const AddOrder = async (req, resp) => {
   const { foods, store_id, table_number, amount } = req.body;
 
@@ -15,7 +13,7 @@ const AddOrder = async (req, resp) => {
     });
   }
 
-  
+
   if (!table_number) {
     return resp.status(401).send({
       message: "Add food description",

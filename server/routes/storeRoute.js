@@ -12,9 +12,11 @@ import updateStoreAddress from "../controller/store/updateStoreAddress.js";
 
 const route = Express.Router();
 
+
+// owner 
+
 route.post("/add-store", validUser, VerifyUser, uploadImage.fields([
-    { name: 'store_logo', maxCount: 1 }, 
-    { name: 'payment_receive_qr_image', maxCount: 1 }
+    { name: 'store_logo', maxCount: 1 }
 ]), AddStoreController );
 
 route.get("/store-list", validUser, VerifyUser, StoreListController );
@@ -23,7 +25,6 @@ route.post("/store-delete-request", validUser, VerifyUser, StoreDeleteRequest);
 route.post("/store-delete-verify", validUser, VerifyUser, storeDeleteVerify);
 route.post("/update-store", validUser, VerifyUser,uploadImage.fields([
     { name: 'store_logo', maxCount: 1 }, 
-    { name: 'payment_receive_qr_image', maxCount: 1 }
 ]), updateStore);
 route.post("/update-store-address", validUser, VerifyUser,updateStoreAddress);
 

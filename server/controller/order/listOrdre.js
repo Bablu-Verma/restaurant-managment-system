@@ -106,7 +106,6 @@ export const GetOneOrderController = async (req, resp) => {
           status: 1,
         });
       }
-  
 
       const delete_order = await OrderModel.findByIdAndRemove(order_id) 
 
@@ -117,7 +116,6 @@ export const GetOneOrderController = async (req, resp) => {
         delete_order
       });
   
-      
     } catch (error) {
       resp.status(500).send({
         message: "Server Error",

@@ -18,6 +18,15 @@ const CheckSubscription = async (req, resp, next) => {
 
     const store = await StoreModel.findById(store_id);
 
+    if(!store){
+      return resp.status(401).send({
+        message: " Store not found",
+        code: 0,
+        status: 0,
+      });
+    }
+
+
     if(store.subscription_type == 1  || store.subscription_type == 2){
         next();
     }

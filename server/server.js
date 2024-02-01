@@ -13,6 +13,8 @@ import urlRoute from "./routes/urlRoute.js";
 import categoryRoute from "./routes/categoryRoute.js";
 import foodRoute from "./routes/foodRoute.js";
 import orderRoute from './routes/orderRoute.js'
+import shareAuth from './routes/shareAuth.js'
+
 
 const app = express();
 dotenv.config();
@@ -42,6 +44,7 @@ app.use("/api/v1/user/store/table", tableRoute);
 app.use("/api/v1/user/store/category", categoryRoute);
 app.use("/api/v1/user/store/food", foodRoute);
 app.use("/api/v1/user/store/order", orderRoute);
+app.use("/api/v1/user/store/share-auth", shareAuth);
 
 
 app.use(urlRoute);
