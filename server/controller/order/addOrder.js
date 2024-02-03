@@ -3,7 +3,7 @@
 import OrderModel from "../../model/orderModel.js";
 
 const AddOrder = async (req, resp) => {
-  const { foods, store_id, table_number, amount } = req.body;
+  const { foods, store_id, table_number, amount, payment} = req.body;
 
   if (!foods || !Array.isArray(foods) || foods.length === 0) {
     return resp.status(401).send({
@@ -39,7 +39,7 @@ if (calculatedAmount !== amount) {
 }
 
 const new_order = new OrderModel({
-    foods, store_id, table_number, amount
+    foods, store_id, table_number, amount, payment,
 });
 
  const order = await new_order.save()

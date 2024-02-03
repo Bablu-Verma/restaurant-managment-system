@@ -22,6 +22,25 @@ const orderItemSchema = new mongoose.Schema({
 });
 
 
+const orderPaymentSchema = new mongoose.Schema({
+  method: {
+    type: String,
+    enum: ["CASH", "UPI"], 
+    required: [true, "Payment method is required"],
+  },
+  status: {
+    type: String,
+    enum: ["Pending", "Completed"],
+    default: "Pending",
+  },
+  amount: {
+    type: Number,
+    required: [true, "Payment amount is required"],
+  },
+});
+
+
+
 
 const orderSchema = new mongoose.Schema(
   {
@@ -48,14 +67,18 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       default: 1,
     },
-    payment:{
-      type: Number,
-      enum: [0, 1], // 0 no payment, 1 payment is successful
-      default: 0,
-    }
+    payment:orderPaymentSchema
   },
   { timestamps: true }
 );
 
 const OrderModel = mongoose.model("Order", orderSchema);
 export default OrderModel;
+
+
+
+
+
+
+
+
